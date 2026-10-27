@@ -10,8 +10,8 @@
    Change these 2 values to match your brand
    ═══════════════════════════════════════════ */
 :root {
-  --primary: #314980;      /* Dark navy (header, text) */
-  --accent: #f73434;       /* Orange (buttons, highlights) */
+  --primary:  #0f172a;      /* Dark navy (header, text) */
+  --accent:  #ec4899;       /* Orange (buttons, highlights) */
   --accent-hover: #da5151; /* Darker orange on hover */
   --bg: #e8eff7;           /* Page background */
   --card: #ffffff;         /* Card background */
@@ -353,11 +353,71 @@ footer a:hover { text-decoration: underline; }
   color: #0c4a6e;
 }
 .tips-box strong { color: #075985; }
+/* Dark Mode */
+body.dark-mode {
+  --primary: #cbd5e1;
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --border: #334155;
+}
+
+body.dark-mode textarea {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+body.dark-mode textarea:focus {
+  background: #1e293b;
+}
+
+body.dark-mode .tips-box {
+  background: #172554;
+  border-color: #1e40af;
+  color: #dbeafe;
+}
+
+body.dark-mode .tips-box strong {
+  color: #bfdbfe;
+}
+
+body.dark-mode .insight-list li {
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .keyword {
+  background: #422006;
+  color: #fde68a;
+  border-color: #854d0e;
+}
+
+/* Dark Mode Toggle Button */
+#darkModeToggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 2;
+}
+
+#darkModeToggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
 </style>
 </head>
 <body>
 
 <header>
+  <button id="darkModeToggle" onclick="toggleDarkMode()">
+  🌙 Dark Mode
+</button>
   <!-- ✏️ CUSTOMIZE: Change your app name here -->
   <h1>Career Go Copilot</h1>
   <p>Paste your resume and a job description. Get instant, AI-powered feedback to land your dream job.</p>
@@ -402,7 +462,7 @@ footer a:hover { text-decoration: underline; }
    🔑 STEP 1: PASTE YOUR GEMINI API KEY BELOW
    Get free key from: https://aistudio.google.com
    ═══════════════════════════════════════════════════ */
-const GEMINI_API_KEY = "AQ.Ab8RN6Jwbl5fmHRwk4O7ar-O6gQewXQTh11rrR_5zwUlq0bzeg";
+const GEMINI_API_KEY = " process.env.GEMINI_API_KEY";
 
 /* ═══════════════════════════════════════════════════
    🧠 STEP 2: CUSTOMIZE YOUR SYSTEM PROMPT
@@ -614,6 +674,15 @@ function displayResults(analysis) {
 
   // Scroll to results
   resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+/* Dark Mode Toggle — Task 2 Logic */
+function toggleDarkMode() {
+  const isDark = document.body.classList.toggle('dark-mode');
+  const toggleButton = document.getElementById('darkModeToggle');
+
+  toggleButton.textContent = isDark
+    ? '☀️ Light Mode'
+    : '🌙 Dark Mode';
 }
 </script>
 
